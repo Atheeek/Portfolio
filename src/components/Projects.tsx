@@ -1,10 +1,12 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Github, ExternalLink, ArrowUp } from 'lucide-react';
-import project1 from '../assets/project-1.jpg';
-import project2 from '../assets/project-2.jpg';
-import project3 from '../assets/project-3.jpg';
+import { Github, ExternalLink } from 'lucide-react';
+import cognifyImg from '../assets/cognify.png';
+import smartcityImg from '../assets/cityfux.png';
+import billingImg from '../assets/billing.png';
+import schoolImg from '../assets/academics.png';
+
 
 const Projects = () => {
   const ref = useRef(null);
@@ -13,32 +15,46 @@ const Projects = () => {
   const projects = [
     {
       id: 1,
-      title: "Modern Dashboard App",
-      description: "A comprehensive dashboard application built with React and Node.js, featuring real-time data visualization, user authentication, and responsive design.",
-      image: project1,
-      technologies: ["React", "Node.js", "MongoDB", "Chart.js", "JWT"],
-      githubUrl: "#",
+      title: "Cognify – Child Learning & Screening Platform",
+      description:
+        "Full-stack MERN platform with JWT auth, real-time tracking, and dashboards for children and parents. Voice-enabled AI chatbot, gamified learning modules, and cognitive development games.",
+      image: cognifyImg,
+      technologies: ["React.js", "Node.js", "Express.js", "MongoDB", "JWT", "OpenRouter", "Tailwind CSS"],
+      githubUrl: "https://github.com/Atheeek/Cognify-project",
       liveUrl: "#",
       featured: true
     },
     {
       id: 2,
-      title: "E-Commerce Platform",
-      description: "Full-stack e-commerce solution with payment integration, inventory management, and admin dashboard. Built for scalability and performance.",
-      image: project2,
-      technologies: ["React", "Express", "Stripe", "PostgreSQL", "Redux"],
-      githubUrl: "#",
+      title: "SmartCity CMS – Complaint Management System",
+      description:
+        "MERN-based portal with secure login, role-based dashboards, and real-time complaint tracking. Integrated Google Maps API with dynamic heatmaps and location-tagged complaints. Admin tools for categorization and resolution workflows.",
+      image: smartcityImg,
+      technologies: ["React.js", "Node.js", "Express.js", "MongoDB", "Google Maps API", "JWT", "Tailwind CSS"],
+      githubUrl: "https://github.com/Atheeek/City-fix",
       liveUrl: "#",
       featured: true
     },
     {
       id: 3,
-      title: "Task Management System",
-      description: "Collaborative project management tool with drag-and-drop functionality, real-time updates, and team collaboration features.",
-      image: project3,
-      technologies: ["React", "Socket.io", "MongoDB", "Tailwind", "Framer Motion"],
-      githubUrl: "#",
+      title: "Billing Software (MERN Stack)",
+      description:
+        "A full-featured billing and invoice management system designed for businesses like jewelry stores. Features include user authentication, dynamic invoice fields, PDF export, tax/rate configuration, itemized billing, and dashboards.",
+      image: billingImg,
+      technologies: ["React", "Vite", "Tailwind CSS", "Node.js", "Express.js", "MongoDB", "jsPDF"],
+      githubUrl: "https://github.com/Atheeek/billing",
       liveUrl: "#",
+      featured: false
+    },
+      {
+      id: 4,
+      title: "School Website – Excelsior Academy",
+      description:
+        "A modern, accessible, and fully responsive school website built using React, TypeScript, and Tailwind CSS. Features include animated pages, academic details, contact forms, and SEO-friendly design.",
+      image: schoolImg,
+      technologies: ["React", "TypeScript", "Vite", "Tailwind CSS", "Framer Motion", "React Router"],
+      githubUrl: "https://github.com/Atheeek/School-website",
+      liveUrl: "https://school-websitecom.netlify.app/",
       featured: false
     }
   ];
@@ -84,12 +100,16 @@ const Projects = () => {
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center space-x-4">
-                    <button className="p-3 bg-neon-cyan text-black rounded-full hover:bg-white transition-colors">
-                      <Github className="w-6 h-6" />
-                    </button>
-                    <button className="p-3 bg-neon-pink text-white rounded-full hover:bg-neon-purple transition-colors">
-                      <ExternalLink className="w-6 h-6" />
-                    </button>
+                    <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                      <button className="p-3 bg-neon-cyan text-black rounded-full hover:bg-white transition-colors">
+                        <Github className="w-6 h-6" />
+                      </button>
+                    </a>
+                    <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+                      <button className="p-3 bg-neon-pink text-white rounded-full hover:bg-neon-purple transition-colors">
+                        <ExternalLink className="w-6 h-6" />
+                      </button>
+                    </a>
                   </div>
                 </div>
                 {project.featured && (
@@ -119,14 +139,18 @@ const Projects = () => {
                   ))}
                 </div>
                 <div className="flex gap-4">
-                  <button className="btn-ghost-neon group">
-                    <Github className="w-5 h-5 mr-2 group-hover:rotate-12" />
-                    View Code
-                  </button>
-                  <button className="btn-neon group">
-                    <ExternalLink className="w-5 h-5 mr-2 group-hover:-translate-y-1" />
-                    Live Demo
-                  </button>
+                  <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                    <button className="btn-ghost-neon group">
+                      <Github className="w-5 h-5 mr-2 group-hover:rotate-12" />
+                      View Code
+                    </button>
+                  </a>
+                  <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+                    <button className="btn-neon group">
+                      <ExternalLink className="w-5 h-5 mr-2 group-hover:-translate-y-1" />
+                      Live Demo
+                    </button>
+                  </a>
                 </div>
               </div>
             </motion.div>

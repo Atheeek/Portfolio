@@ -2,13 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
-
 @layer base {
   :root {
-    /* Dark theme as default for developer portfolio */
+    /* Dark theme defaults */
     --background: 224 71% 4%;
     --foreground: 213 31% 91%;
 
@@ -39,93 +35,77 @@ All colors MUST be HSL.
     --ring: 216 34% 17%;
     --radius: 0.75rem;
 
-    /* Developer-themed colors */
     --neon-cyan: 180 100% 50%;
     --neon-pink: 330 100% 70%;
     --neon-green: 120 100% 50%;
     --neon-purple: 270 100% 70%;
     --neon-yellow: 60 100% 50%;
 
-    /* Gradients */
     --gradient-primary: linear-gradient(135deg, hsl(var(--neon-cyan)), hsl(var(--neon-purple)));
     --gradient-secondary: linear-gradient(135deg, hsl(var(--neon-pink)), hsl(var(--neon-yellow)));
     --gradient-accent: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--neon-green)));
     --gradient-dark: linear-gradient(135deg, hsl(224 71% 4%), hsl(216 34% 17%));
 
-    /* Glass morphism */
     --glass-bg: hsla(224, 71%, 4%, 0.8);
     --glass-border: hsla(213, 31%, 91%, 0.1);
 
-    /* Shadows with neon glow */
     --shadow-neon: 0 0 20px hsl(var(--neon-cyan) / 0.3);
     --shadow-glow: 0 10px 40px hsl(var(--neon-purple) / 0.2);
     --shadow-soft: 0 4px 20px hsl(224 71% 4% / 0.3);
 
-  /* Animation variables */
-  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-
-/* Add custom animation for slow spin */
-@keyframes spin-slow {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.animate-spin-slow {
-  animation: spin-slow 3s linear infinite;
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   }
 
   .light {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
+
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
+
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
+
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
+
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
+
     --primary: 222.2 47.4% 11.2%;
     --primary-foreground: 210 40% 98%;
+
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
+
     --accent: 220 14.3% 95.9%;
     --accent-foreground: 220 8.9% 46.1%;
+
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
+
     --ring: 222.2 84% 4.9%;
 
-    /* Adjusted neon colors for light mode - darker for better contrast */
     --neon-cyan: 200 100% 35%;
     --neon-pink: 330 100% 45%;
     --neon-green: 120 100% 35%;
     --neon-purple: 270 100% 45%;
     --neon-yellow: 60 100% 40%;
 
-    /* Light mode gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(200, 100%, 35%), hsl(270, 100%, 45%));
-    --gradient-secondary: linear-gradient(135deg, hsl(330, 100%, 45%), hsl(60, 100%, 40%));
-    --gradient-accent: linear-gradient(135deg, hsl(120, 100%, 35%), hsl(200, 100%, 35%));
-    --gradient-dark: linear-gradient(135deg, hsl(0, 0%, 100%), hsl(210, 40%, 96%));
+    --gradient-primary: linear-gradient(135deg, hsl(200 100% 35%), hsl(270 100% 45%));
+    --gradient-secondary: linear-gradient(135deg, hsl(330 100% 45%), hsl(60 100% 40%));
+    --gradient-accent: linear-gradient(135deg, hsl(120 100% 35%), hsl(200 100% 35%));
+    --gradient-dark: linear-gradient(135deg, hsl(0 0% 100%), hsl(210 40% 96%));
 
-    /* Glass morphism for light mode */
     --glass-bg: hsla(0, 0%, 100%, 0.8);
     --glass-border: hsla(222, 84%, 4%, 0.1);
 
-    /* Shadows for light mode */
-    --shadow-neon: 0 0 20px hsl(200, 100%, 35%, 0.3);
-    --shadow-glow: 0 10px 40px hsl(270, 100%, 45%, 0.2);
-    --shadow-soft: 0 4px 20px hsl(0, 0%, 0%, 0.1);
+    --shadow-neon: 0 0 20px hsl(200 100% 35% / 0.3);
+    --shadow-glow: 0 10px 40px hsl(270 100% 45% / 0.2);
+    --shadow-soft: 0 4px 20px hsl(0 0% 0% / 0.1);
   }
-}
 
-@layer base {
   * {
     @apply border-border;
   }
@@ -139,7 +119,6 @@ All colors MUST be HSL.
     scroll-behavior: smooth;
   }
 
-  /* Custom scrollbar - theme aware */
   ::-webkit-scrollbar {
     width: 8px;
   }
@@ -157,7 +136,6 @@ All colors MUST be HSL.
     background: hsl(var(--neon-cyan));
   }
 
-  /* Light mode specific scrollbar */
   .light ::-webkit-scrollbar-thumb {
     background: hsl(var(--neon-cyan));
   }
@@ -165,10 +143,22 @@ All colors MUST be HSL.
   .light ::-webkit-scrollbar-thumb:hover {
     background: hsl(var(--neon-purple));
   }
+
+  @keyframes spin-slow {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .animate-spin-slow {
+    animation: spin-slow 3s linear infinite;
+  }
 }
 
 @layer components {
-  /* Glass morphism utility classes */
   .glass {
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
@@ -181,7 +171,6 @@ All colors MUST be HSL.
     box-shadow: var(--shadow-soft);
   }
 
-  /* Gradient text effects */
   .gradient-text {
     background: var(--gradient-primary);
     -webkit-background-clip: text;
@@ -196,7 +185,6 @@ All colors MUST be HSL.
     background-clip: text;
   }
 
-  /* Neon glow effects */
   .neon-glow {
     box-shadow: var(--shadow-neon);
   }
@@ -206,7 +194,6 @@ All colors MUST be HSL.
     box-shadow: 0 0 10px hsl(var(--neon-cyan) / 0.3);
   }
 
-  /* Button variants - theme aware */
   .btn-neon {
     @apply relative overflow-hidden rounded-lg px-6 py-3 font-medium transition-all duration-300;
     background: var(--gradient-primary);
@@ -230,7 +217,6 @@ All colors MUST be HSL.
     box-shadow: var(--shadow-neon);
   }
 
-  /* Light mode button adjustments */
   .light .btn-neon {
     color: white;
   }
@@ -246,7 +232,6 @@ All colors MUST be HSL.
     border-color: hsl(var(--neon-purple));
   }
 
-  /* Floating animation */
   .floating {
     animation: floating 3s ease-in-out infinite;
   }
@@ -256,7 +241,6 @@ All colors MUST be HSL.
     50% { transform: translateY(-10px); }
   }
 
-  /* Pulse glow animation */
   .pulse-glow {
     animation: pulse-glow 2s ease-in-out infinite alternate;
   }

@@ -1,21 +1,47 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
+import html5 from '../assets/skills/html5.svg';
+import css3 from '../assets/skills/css3.svg';
+import js from '../assets/skills/javascript.svg';
+import react from '../assets/skills/react.svg';
+import vite from '../assets/skills/vite.svg';
+import node from '../assets/skills/nodejs.svg';
+import express from '../assets/skills/express.svg';
+import mongodb from '../assets/skills/mongodb.svg';
+import mysql from '../assets/skills/mysql.svg';
+import firebase from '../assets/skills/firebase.svg';
+import postman from '../assets/skills/postman.svg';
+import github from '../assets/skills/github.svg';
+import tailwind from '../assets/skills/tailwindcss.svg';
+import vercel from '../assets/skills/vercel.svg';
+import vscode from '../assets/skills/vscode.svg';
+
+
+
+const skills = [
+  { name: 'HTML5', img: html5 },
+  { name: 'CSS3', img: css3 },
+  { name: 'JavaScript', img: js },
+  { name: 'React', img: react },
+  { name: 'Vite', img: vite },
+  { name: 'Node.js', img: node },
+  { name: 'Express.js', img: express },
+  { name: 'MongoDB', img: mongodb },
+  { name: 'MySQL', img: mysql },
+  { name: 'Firebase', img: firebase },
+  { name: 'Postman', img: postman },
+  { name: 'GitHub', img: github },
+  { name: 'Tailwind CSS', img: tailwind },
+  { name: 'Vercel', img: vercel },
+  { name: 'VS Code', img: vscode },
+];
+
+
 
 const Skills = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.1 });
-
-  const skills = [
-    { name: 'HTML5', icon: '🌐', level: 95, color: 'from-orange-500 to-red-500' },
-    { name: 'CSS3', icon: '🎨', level: 90, color: 'from-blue-500 to-cyan-500' },
-    { name: 'JavaScript', icon: '⚡', level: 92, color: 'from-yellow-400 to-orange-500' },
-    { name: 'React', icon: '⚛️', level: 88, color: 'from-cyan-400 to-blue-500' },
-    { name: 'Node.js', icon: '🚀', level: 85, color: 'from-green-400 to-emerald-500' },
-    { name: 'MongoDB', icon: '🍃', level: 80, color: 'from-emerald-500 to-green-600' },
-    { name: 'GitHub', icon: '🐙', level: 90, color: 'from-gray-600 to-gray-800' },
-    { name: 'TypeScript', icon: '📘', level: 85, color: 'from-blue-600 to-indigo-600' }
-  ];
 
   return (
     <section ref={ref} className="py-20 px-4 relative">
@@ -30,41 +56,22 @@ const Skills = () => {
             Technical Skills
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Technologies and tools I use to bring ideas to life
+            Technologies and tools I use to build and deploy great web experiences
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2  sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
           {skills.map((skill, index) => (
             <motion.div
               key={skill.name}
-              initial={{ opacity: 0, y: 50, scale: 0.8 }}
-              animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
-              transition={{ delay: index * 0.1, duration: 0.6 }}
-              whileHover={{ scale: 1.05, rotateY: 5 }}
-              className="glass-card group cursor-pointer relative overflow-hidden"
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: index * 0.08, duration: 0.5 }}
+              whileHover={{ scale: 1.1 }}
+              className="glass-card p-6 flex flex-col  items-center justify-center text-center"
             >
-              <div className="relative z-10 text-center p-6">
-                <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                  {skill.icon}
-                </div>
-                <h3 className="text-xl font-semibold mb-4 text-foreground group-hover:text-neon-cyan transition-colors">
-                  {skill.name}
-                </h3>
-                <div className="relative">
-                  <div className="w-full bg-muted rounded-full h-2 mb-2">
-                    <motion.div
-                      className={`h-2 rounded-full bg-gradient-to-r ${skill.color}`}
-                      initial={{ width: 0 }}
-                      animate={isInView ? { width: `${skill.level}%` } : { width: 0 }}
-                      transition={{ delay: index * 0.1 + 0.5, duration: 1 }}
-                    />
-                  </div>
-                  <span className="text-sm text-muted-foreground font-medium">
-                    {skill.level}%
-                  </span>
-                </div>
-              </div>
+              <img src={skill.img} alt={skill.name} className="w-16 h-16 mb-4 object-contain" />
+              <p className="text-base font-medium text-foreground">{skill.name}</p>
             </motion.div>
           ))}
         </div>

@@ -1,27 +1,14 @@
 import { motion } from 'framer-motion';
 import { Download, Github, Linkedin } from 'lucide-react';
-import profilePhoto from '../assets/profile-photo.jpg';
+import profilePhoto from '../assets/profile4.png';
 import { Suspense, useState, useEffect } from 'react';
 
 // Sophisticated gradient mesh background
 const AnimatedBackground = () => {
   return (
-    <div className="absolute inset-0 overflow-hidden">
-      {/* Smooth gradient mesh */}
+    <div className="absolute inset-0 overflow-hidden ">
       <div className="absolute inset-0">
-        {/* Main gradient overlay */}
-        <div 
-          className="absolute inset-0 opacity-60"
-          style={{
-            background: `
-              radial-gradient(circle at 20% 80%, hsl(var(--neon-cyan) / 0.3) 0%, transparent 50%),
-              radial-gradient(circle at 80% 20%, hsl(var(--neon-purple) / 0.3) 0%, transparent 50%),
-              radial-gradient(circle at 40% 40%, hsl(var(--neon-pink) / 0.2) 0%, transparent 50%)
-            `
-          }}
-        />
-        
-        {/* Subtle animated orbs */}
+        <div className="absolute inset-0 opacity-60" />
         <motion.div
           className="absolute inset-0"
           animate={{
@@ -37,8 +24,6 @@ const AnimatedBackground = () => {
             ease: "easeInOut"
           }}
         />
-        
-        {/* Soft particles */}
         {Array.from({ length: 3 }).map((_, i) => (
           <motion.div
             key={i}
@@ -66,7 +51,15 @@ const AnimatedBackground = () => {
 
 // Typewriter effect component
 const TypewriterText = () => {
-  const texts = ["Alex Developer", "Full-Stack Developer", "React Specialist", "UI/UX Enthusiast"];
+const texts = [
+  "Mahammad Atheek",
+  "Full-Stack MERN Developer",
+  "Frontend Developer ",
+  "Backend Developer",
+  "React Developer",
+  "UI/UX-Focused Engineer"
+ 
+];
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const [currentText, setCurrentText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
@@ -93,7 +86,7 @@ const TypewriterText = () => {
   }, [currentText, isDeleting, currentTextIndex, texts]);
 
   return (
-    <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold gradient-text min-h-[1.2em]">
+<div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold gradient-text min-h-[2.5em] sm:min-h-[3em]">
       {currentText}
       <span className="animate-pulse">|</span>
     </div>
@@ -101,7 +94,6 @@ const TypewriterText = () => {
 };
 
 const Hero = () => {
-  
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Animated Background */}
@@ -155,56 +147,55 @@ const Hero = () => {
                 Download Resume
               </button>
               
-              <button className="btn-ghost-neon group text-sm sm:text-base">
-                <Github className="w-4 h-4 sm:w-5 sm:h-5 mr-2 group-hover:rotate-12" />
-                View GitHub
-              </button>
-              
+             <a href="https://github.com/Atheeek" target="_blank" rel="noopener noreferrer">
+  <button className="btn-ghost-neon group text-sm sm:text-base">
+    <Github className="w-4 h-4 sm:w-5 sm:h-5 mr-2 group-hover:rotate-12" />
+    View GitHub
+  </button>
+</a>
+
+              <a href="https://www.linkedin.com/in/mahammad-atheek-rahman-657533253/" target="_blank" rel="noopener noreferrer">
               <button className="btn-ghost-neon group text-sm sm:text-base">
                 <Linkedin className="w-4 h-4 sm:w-5 sm:h-5 mr-2 group-hover:scale-110" />
                 Connect
               </button>
+              </a>
             </motion.div>
           </motion.div>
 
-          {/* Profile Photo */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 2.5, duration: 0.8 }}
-            className="relative order-first md:order-last"
-          >
-            <div className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 mx-auto">
-              {/* Glowing Ring */}
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-neon-cyan via-neon-purple to-neon-pink p-1 animate-spin-slow">
-                <div className="w-full h-full rounded-full bg-background"></div>
-              </div>
-              
-              {/* Profile Image */}
-              <div className="absolute inset-2 rounded-full overflow-hidden">
-                <img
-                  src={profilePhoto}
-                  alt="Alex Developer"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              
-              {/* Floating Particles */}
-              <div className="absolute -inset-4">
-                {Array.from({ length: 6 }).map((_, i) => (
-                  <div
-                    key={i}
-                    className="absolute w-1.5 h-1.5 sm:w-2 sm:h-2 bg-neon-cyan rounded-full animate-pulse"
-                    style={{
-                      top: `${Math.random() * 100}%`,
-                      left: `${Math.random() * 100}%`,
-                      animationDelay: `${i * 0.5}s`
-                    }}
-                  />
-                ))}
-              </div>
-            </div>
-          </motion.div>
+          {/* ✅ Profile Photo WITHOUT circular borders or glow */}
+     <motion.div
+  initial={{ opacity: 0, scale: 0.8 }}
+  animate={{ opacity: 1, scale: 1 }}
+  transition={{ delay: 2.5, duration: 0.8 }}
+  className="relative order-first md:order-last flex justify-center"
+>
+  <div className="relative w-[360px] h-[360px] sm:w-[400px] sm:h-[400px] lg:w-[450px] lg:h-[450px] group">
+    
+    {/* 🔥 Glowing Background Orb */}
+    <motion.div
+      className="absolute inset-0 rounded-full blur-2xl bg-gradient-to-br from-cyan-400 via-purple-500 to-pink-500 opacity-40 z-0"
+      animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.4, 0.3] }}
+      transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+    />
+
+    {/* 🔵 Optional Floating Glow Ring */}
+    <motion.div
+      className="absolute inset-0 rounded-full border border-cyan-500 opacity-20 z-0"
+      animate={{ rotate: 360 }}
+      transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+    />
+
+    {/* 🧑🏽 Transparent Profile Image */}
+    <motion.img
+      src={profilePhoto}
+      alt="Mahammad Atheek Rahman"
+className="relative z-10 w-full h-full object-contain transition-transform duration-500 group-hover:scale-105 rounded-full"
+      whileHover={{ rotateZ: 1 }}
+    />
+  </div>
+</motion.div>
+
         </div>
 
         {/* Scroll Indicator */}

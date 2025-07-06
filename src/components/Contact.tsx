@@ -2,17 +2,18 @@ import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
 import { Send, Mail, MapPin, Phone, Github, Linkedin } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.1 });
-  
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     message: ''
   });
-  
+
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleInputChange = (e) => {
@@ -25,32 +26,41 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    console.log('Form submitted:', formData);
-    setFormData({ name: '', email: '', message: '' });
-    setIsSubmitting(false);
+
+    emailjs.send(
+      'service_f30uz1d', // Your EmailJS Service ID
+      'template_806t2lv', // Your EmailJS Template ID
+      formData,
+      'X7kLJwPVPOGqeA0QC' // Your EmailJS Public Key
+    )
+    .then((result) => {
+      console.log('✅ Email sent:', result.text);
+      setFormData({ name: '', email: '', message: '' });
+    }, (error) => {
+      console.error('❌ Email error:', error.text);
+    })
+    .finally(() => {
+      setIsSubmitting(false);
+    });
   };
 
   const contactInfo = [
     {
       icon: Mail,
       label: 'Email',
-      value: 'alex@developer.com',
-      href: 'mailto:alex@developer.com'
+      value: 'atheek163@gmail.com',
+      href: 'mailto:atheek163@gmail.com'
     },
     {
       icon: Phone,
       label: 'Phone',
-      value: '+1 (555) 123-4567',
-      href: 'tel:+15551234567'
+      value: '+91 8971490262',
+      href: 'tel:+918971490262'
     },
     {
       icon: MapPin,
       label: 'Location',
-      value: 'San Francisco, CA',
+      value: 'Karnataka, India',
       href: '#'
     }
   ];
@@ -59,13 +69,13 @@ const Contact = () => {
     {
       icon: Github,
       label: 'GitHub',
-      href: 'https://github.com',
+      href: 'https://github.com/Atheeek',
       color: 'hover:text-neon-cyan'
     },
     {
       icon: Linkedin,
       label: 'LinkedIn',
-      href: 'https://linkedin.com',
+      href: 'https://www.linkedin.com/in/mahammad-atheek-rahman-657533253/',
       color: 'hover:text-neon-purple'
     }
   ];
@@ -73,7 +83,6 @@ const Contact = () => {
   return (
     <section ref={ref} className="py-20 px-4 relative">
       <div className="max-w-6xl mx-auto">
-        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: -50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -89,7 +98,6 @@ const Contact = () => {
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12">
-          {/* Contact Form */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
@@ -99,9 +107,8 @@ const Contact = () => {
             <h3 className="text-2xl font-semibold mb-6 text-foreground">
               Send a Message
             </h3>
-            
+
             <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Name Input */}
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
                   Name
@@ -118,7 +125,6 @@ const Contact = () => {
                 />
               </div>
 
-              {/* Email Input */}
               <div>
                 <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
                   Email
@@ -135,7 +141,6 @@ const Contact = () => {
                 />
               </div>
 
-              {/* Message Input */}
               <div>
                 <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
                   Message
@@ -152,7 +157,6 @@ const Contact = () => {
                 />
               </div>
 
-              {/* Submit Button */}
               <motion.button
                 type="submit"
                 disabled={isSubmitting}
@@ -175,19 +179,16 @@ const Contact = () => {
             </form>
           </motion.div>
 
-          {/* Contact Information */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ delay: 0.4, duration: 0.8 }}
             className="space-y-8"
           >
-            {/* Contact Info Cards */}
             <div className="space-y-6">
               <h3 className="text-2xl font-semibold text-foreground mb-6">
                 Get in Touch
               </h3>
-              
               {contactInfo.map((info, index) => (
                 <motion.a
                   key={info.label}
@@ -211,7 +212,6 @@ const Contact = () => {
               ))}
             </div>
 
-            {/* Social Links */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -238,7 +238,6 @@ const Contact = () => {
               </div>
             </motion.div>
 
-            {/* Availability Status */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}

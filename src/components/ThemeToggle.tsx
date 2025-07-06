@@ -3,29 +3,31 @@ import { Moon, Sun } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 const ThemeToggle = () => {
-  const [isDark, setIsDark] = useState(true); // Default to dark theme for developer aesthetic
+  const [isDark, setIsDark] = useState(true); // Default to dark
 
   useEffect(() => {
-    // Check if theme is stored in localStorage
     const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      setIsDark(savedTheme === 'dark');
-      document.documentElement.classList.toggle('light', savedTheme === 'light');
+
+    if (savedTheme === 'light') {
+      setIsDark(false);
+      document.documentElement.classList.add('light');
     } else {
-      // Default to dark theme
+      setIsDark(true);
       document.documentElement.classList.remove('light');
     }
   }, []);
 
   const toggleTheme = () => {
-    const newTheme = !isDark;
-    setIsDark(newTheme);
+    const newIsDark = !isDark;
+    setIsDark(newIsDark);
     
-    // Update localStorage
-    localStorage.setItem('theme', newTheme ? 'dark' : 'light');
-    
-    // Update document class
-    document.documentElement.classList.toggle('light', !newTheme);
+    if (newIsDark) {
+      localStorage.setItem('theme', 'dark');
+      document.documentElement.classList.remove('light');
+    } else {
+      localStorage.setItem('theme', 'light');
+      document.documentElement.classList.add('light');
+    }
   };
 
   return (
@@ -51,7 +53,7 @@ const ThemeToggle = () => {
           <Sun className="w-6 h-6 text-neon-yellow group-hover:text-neon-pink transition-colors" />
         )}
       </motion.div>
-      
+
       {/* Tooltip */}
       <div className="absolute right-full mr-3 top-1/2 transform -translate-y-1/2 px-2 py-1 bg-foreground text-background text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
         Switch to {isDark ? 'light' : 'dark'} mode
