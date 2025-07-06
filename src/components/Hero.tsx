@@ -1,22 +1,50 @@
-import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Sphere, MeshDistortMaterial, Float } from '@react-three/drei';
 import { motion } from 'framer-motion';
 import { Download, Github, Linkedin } from 'lucide-react';
 import profilePhoto from '../assets/profile-photo.jpg';
+import { Suspense } from 'react';
 
-const AnimatedSphere = () => {
+// Simplified animated background without Three.js to avoid compatibility issues
+const AnimatedBackground = () => {
   return (
-    <Float speed={1.4} rotationIntensity={1} floatIntensity={2}>
-      <Sphere args={[1, 100, 200]} scale={2.4}>
-        <MeshDistortMaterial
-          color="#00ffff"
-          attach="material"
-          distort={0.3}
-          speed={1.5}
-          roughness={0}
+    <div className="absolute inset-0 overflow-hidden">
+      {/* Floating geometric shapes */}
+      {Array.from({ length: 6 }).map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute rounded-full opacity-20"
+          style={{
+            width: `${60 + i * 20}px`,
+            height: `${60 + i * 20}px`,
+            background: `radial-gradient(circle, hsl(${180 + i * 60}, 100%, 60%), transparent)`,
+            left: `${10 + i * 15}%`,
+            top: `${20 + i * 10}%`,
+          }}
+          animate={{
+            y: [0, -30, 0],
+            x: [0, 15, 0],
+            scale: [1, 1.1, 1],
+            rotate: [0, 180, 360],
+          }}
+          transition={{
+            duration: 8 + i * 2,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
         />
-      </Sphere>
-    </Float>
+      ))}
+      
+      {/* Grid pattern */}
+      <div 
+        className="absolute inset-0 opacity-5"
+        style={{
+          backgroundImage: `
+            linear-gradient(hsl(var(--neon-cyan)) 1px, transparent 1px),
+            linear-gradient(90deg, hsl(var(--neon-cyan)) 1px, transparent 1px)
+          `,
+          backgroundSize: '50px 50px'
+        }}
+      />
+    </div>
   );
 };
 
@@ -25,17 +53,9 @@ const Hero = () => {
   
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Three.js Background */}
+      {/* Animated Background */}
       <div className="absolute inset-0 z-0">
-        <Canvas
-          camera={{ position: [0, 0, 5] }}
-          style={{ background: 'transparent' }}
-        >
-          <ambientLight intensity={0.5} />
-          <directionalLight position={[10, 10, 5]} intensity={1} />
-          <AnimatedSphere />
-          <OrbitControls enableZoom={false} enablePan={false} autoRotate autoRotateSpeed={1} />
-        </Canvas>
+        <AnimatedBackground />
       </div>
 
       {/* Content */}
