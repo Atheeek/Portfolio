@@ -35,7 +35,7 @@ const ThemeToggle = () => {
       onClick={toggleTheme}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
-      className="fixed top-6 right-6 z-50 p-3 glass-card hover:neon-glow transition-all duration-300 group"
+      className="fixed top-14 right-3  md:top-14 md:right-8 z-50 p-3 glass-card hover:neon-glow transition-all duration-300 group"
       aria-label="Toggle theme"
     >
       <motion.div

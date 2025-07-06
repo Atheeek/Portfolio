@@ -17,12 +17,11 @@ const Portfolio = () => {
       ref={ref}
       className="relative text-foreground bg-background"
     >
-      {/* Theme Toggle */}
-      <ThemeToggle />
+      {/* Remove ThemeToggle from here */}
 
-      {/* Subtle dark pattern background (optional) */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute inset-0">
+      {/* Background Pattern */}
+      <div className="fixed  inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute  inset-0">
           <div className="w-full h-full opacity-5" style={{
             background: `
               radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.03) 0%, transparent 50%),

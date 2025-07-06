@@ -1,41 +1,33 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
-import ThemeToggle from './ThemeToggle'; // Assuming ThemeToggle component exists
+import ThemeToggle from './ThemeToggle';
 
 const navLinks = [
   { label: 'Home', href: '#hero' },
   { label: 'Skills', href: '#skills' },
   { label: 'Projects', href: '#projects' },
-  { label: 'Contact', href: '#contact' }
+  { label: 'Contact', href: '#contact' },
 ];
 
-// CORRECT VARIANT DEFINITIONS
-// --------------------------
-
-// Animation variants for the mobile menu container
 const mobileMenuVariants = {
   hidden: {
-      opacity: 0,
-      transition: {
-        when: "afterChildren", // Ensure container fades out after links
-      }
+    opacity: 0,
+    transition: { when: 'afterChildren' },
   },
   visible: {
-      opacity: 1,
-      transition: {
-        when: "beforeChildren", // Ensure container fades in before links
-        staggerChildren: 0.05 // Animate children with a 0.05s delay
-      }
-  }
+    opacity: 1,
+    transition: {
+      when: 'beforeChildren',
+      staggerChildren: 0.05,
+    },
+  },
 };
 
-// Animation variants for individual mobile menu items
 const mobileLinkVariants = {
   hidden: { opacity: 0, y: -15 },
-  visible: { opacity: 1, y: 0 }
+  visible: { opacity: 1, y: 0 },
 };
-
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -43,20 +35,23 @@ const Navbar = () => {
 
   const handleLinkClick = (label) => {
     setActiveLink(label);
-    setIsOpen(false); 
+    setIsOpen(false);
   };
-  
+
   return (
     <motion.nav
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: "easeInOut", delay: 3.5 }}
+      transition={{ duration: 0.6, ease: 'easeInOut', delay: 3.5 }}
       className="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-background/30 shadow-lg shadow-black/10"
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
         {/* Logo */}
-        <a href="#hero" className="text-2xl font-bold gradient-text hover:brightness-110 transition-all duration-300">
-            
+        <a
+          href="#hero"
+          className="text-2xl font-bold gradient-text hover:brightness-110 transition-all duration-300"
+        >
+          {/* Optional Logo Text */}
         </a>
 
         {/* Desktop Nav */}
@@ -66,7 +61,11 @@ const Navbar = () => {
               key={link.label}
               href={link.href}
               onClick={() => handleLinkClick(link.label)}
-              className="relative text-lg font-medium text-slate-300 hover:text-neon-cyan transition-colors duration-300"
+              className={`relative text-lg font-medium transition-colors duration-300 ${
+                activeLink === link.label
+                  ? 'text-neon-cyan'
+                  : 'text-foreground hover:text-neon-cyan'
+              }`}
             >
               {link.label}
               {activeLink === link.label && (
@@ -81,10 +80,16 @@ const Navbar = () => {
           <ThemeToggle />
         </div>
 
-        {/* Mobile Nav Toggle */}
-        <div className="md:hidden flex items-center">
-          <ThemeToggle />
-          <button onClick={() => setIsOpen(!isOpen)} className="ml-4 focus:outline-none text-slate-200 hover:text-neon-cyan z-50">
+        {/* Mobile Nav */}
+        <div className="md:hidden flex items-center gap-4">
+          <div className="mt-1.5">
+            <ThemeToggle />
+          </div>
+
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="focus:outline-none text-foreground hover:text-neon-cyan z-50"
+          >
             <AnimatePresence mode="wait">
               <motion.div
                 key={isOpen ? 'x-icon' : 'menu-icon'}
@@ -100,7 +105,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu Drawer */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -108,7 +113,7 @@ const Navbar = () => {
             initial="hidden"
             animate="visible"
             exit="hidden"
-            className="md:hidden absolute top-full left-0 w-full bg-background/90 backdrop-blur-lg border-t border-neon-cyan/20 px-4 pt-4 pb-6"
+            className="md:hidden absolute top-full left-0 w-full bg-background/90 backdrop-blur-lg border-t border-neon-cyan/20 px-4 pt-4 pb-6 z-40"
           >
             {navLinks.map((link) => (
               <motion.a
@@ -119,7 +124,11 @@ const Navbar = () => {
                 initial="hidden"
                 animate="visible"
                 exit="hidden"
-                className="block text-lg py-3 text-center font-medium text-slate-200 hover:text-neon-cyan transition-colors duration-300"
+                className={`block text-lg py-3 text-center font-medium transition-colors duration-300 ${
+                  activeLink === link.label
+                    ? 'text-neon-cyan'
+                    : 'text-foreground hover:text-neon-cyan'
+                }`}
               >
                 {link.label}
               </motion.a>
