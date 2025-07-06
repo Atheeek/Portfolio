@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { Download, Github, Linkedin } from 'lucide-react';
 import profilePhoto from '../assets/profile-photo.jpg';
-import { Suspense } from 'react';
+import { Suspense, useState, useEffect } from 'react';
 
 // Sophisticated gradient mesh background
 const AnimatedBackground = () => {
@@ -64,8 +64,43 @@ const AnimatedBackground = () => {
   );
 };
 
+// Typewriter effect component
+const TypewriterText = () => {
+  const texts = ["Alex Developer", "Full-Stack Developer", "React Specialist", "UI/UX Enthusiast"];
+  const [currentTextIndex, setCurrentTextIndex] = useState(0);
+  const [currentText, setCurrentText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      const fullText = texts[currentTextIndex];
+      
+      if (isDeleting) {
+        setCurrentText(fullText.substring(0, currentText.length - 1));
+      } else {
+        setCurrentText(fullText.substring(0, currentText.length + 1));
+      }
+
+      if (!isDeleting && currentText === fullText) {
+        setTimeout(() => setIsDeleting(true), 2000);
+      } else if (isDeleting && currentText === "") {
+        setIsDeleting(false);
+        setCurrentTextIndex((prev) => (prev + 1) % texts.length);
+      }
+    }, isDeleting ? 50 : 100);
+
+    return () => clearTimeout(timeout);
+  }, [currentText, isDeleting, currentTextIndex, texts]);
+
+  return (
+    <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold gradient-text min-h-[1.2em]">
+      {currentText}
+      <span className="animate-pulse">|</span>
+    </div>
+  );
+};
+
 const Hero = () => {
-  const name = "Alex Developer";
   
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -84,7 +119,7 @@ const Hero = () => {
             transition={{ duration: 1 }}
             className="space-y-8"
           >
-            {/* Animated Name */}
+            {/* Animated Typewriter Name */}
             <div className="space-y-4">
               <motion.div
                 initial={{ opacity: 0, y: 50 }}
@@ -95,19 +130,7 @@ const Hero = () => {
                 Hi, I'm
               </motion.div>
               
-              <div className="text-6xl lg:text-8xl font-bold">
-                {name.split('').map((letter, index) => (
-                  <motion.span
-                    key={index}
-                    initial={{ opacity: 0, y: 50, rotateX: -90 }}
-                    animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                    transition={{ delay: index * 0.1, duration: 0.5 }}
-                    className={letter === ' ' ? 'inline-block w-4' : 'inline-block gradient-text'}
-                  >
-                    {letter}
-                  </motion.span>
-                ))}
-              </div>
+              <TypewriterText />
             </div>
 
             {/* Tagline */}
@@ -115,9 +138,9 @@ const Hero = () => {
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.5, duration: 0.8 }}
-              className="text-xl lg:text-2xl text-muted-foreground max-w-2xl"
+              className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-2xl mx-auto md:mx-0"
             >
-              Full-Stack Developer crafting exceptional digital experiences with modern technologies
+              Crafting exceptional digital experiences with modern technologies
             </motion.p>
 
             {/* CTA Buttons */}
@@ -125,20 +148,20 @@ const Hero = () => {
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 2, duration: 0.8 }}
-              className="flex flex-wrap gap-4 justify-center md:justify-start"
+              className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-center md:justify-start"
             >
-              <button className="btn-neon group">
-                <Download className="w-5 h-5 mr-2 group-hover:animate-bounce" />
+              <button className="btn-neon group text-sm sm:text-base">
+                <Download className="w-4 h-4 sm:w-5 sm:h-5 mr-2 group-hover:animate-bounce" />
                 Download Resume
               </button>
               
-              <button className="btn-ghost-neon group">
-                <Github className="w-5 h-5 mr-2 group-hover:rotate-12" />
+              <button className="btn-ghost-neon group text-sm sm:text-base">
+                <Github className="w-4 h-4 sm:w-5 sm:h-5 mr-2 group-hover:rotate-12" />
                 View GitHub
               </button>
               
-              <button className="btn-ghost-neon group">
-                <Linkedin className="w-5 h-5 mr-2 group-hover:scale-110" />
+              <button className="btn-ghost-neon group text-sm sm:text-base">
+                <Linkedin className="w-4 h-4 sm:w-5 sm:h-5 mr-2 group-hover:scale-110" />
                 Connect
               </button>
             </motion.div>
@@ -149,9 +172,9 @@ const Hero = () => {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 2.5, duration: 0.8 }}
-            className="relative"
+            className="relative order-first md:order-last"
           >
-            <div className="relative w-80 h-80 mx-auto">
+            <div className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 mx-auto">
               {/* Glowing Ring */}
               <div className="absolute inset-0 rounded-full bg-gradient-to-r from-neon-cyan via-neon-purple to-neon-pink p-1 animate-spin-slow">
                 <div className="w-full h-full rounded-full bg-background"></div>
@@ -171,7 +194,7 @@ const Hero = () => {
                 {Array.from({ length: 6 }).map((_, i) => (
                   <div
                     key={i}
-                    className="absolute w-2 h-2 bg-neon-cyan rounded-full animate-pulse"
+                    className="absolute w-1.5 h-1.5 sm:w-2 sm:h-2 bg-neon-cyan rounded-full animate-pulse"
                     style={{
                       top: `${Math.random() * 100}%`,
                       left: `${Math.random() * 100}%`,
