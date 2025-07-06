@@ -22,42 +22,18 @@ const Portfolio = () => {
       {/* Theme Toggle */}
       <ThemeToggle />
 
-      {/* Animated Background Elements */}
+      {/* Clean animated background elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        {/* Floating Orbs */}
-        {Array.from({ length: 5 }).map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-64 h-64 rounded-full opacity-10"
-            style={{
-              background: `radial-gradient(circle, hsl(${180 + i * 60}, 100%, 60%), transparent)`,
-              left: `${20 + i * 20}%`,
-              top: `${10 + i * 15}%`,
-              y: useTransform(scrollYProgress, [0, 1], [0, -100 * (i + 1)])
-            }}
-            animate={{
-              scale: [1, 1.2, 1],
-              rotate: [0, 360],
-            }}
-            transition={{
-              duration: 10 + i * 2,
-              repeat: Infinity,
-              ease: "linear"
-            }}
-          />
-        ))}
-
-        {/* Grid Pattern */}
+        {/* Subtle gradient overlay */}
         <motion.div
           style={{ y, opacity }}
-          className="absolute inset-0"
+          className="absolute inset-0 opacity-30"
         >
-          <div className="w-full h-full opacity-5" style={{
-            backgroundImage: `
-              linear-gradient(hsl(var(--neon-cyan)) 1px, transparent 1px),
-              linear-gradient(90deg, hsl(var(--neon-cyan)) 1px, transparent 1px)
-            `,
-            backgroundSize: '50px 50px'
+          <div className="w-full h-full" style={{
+            background: `
+              radial-gradient(circle at 10% 20%, hsl(var(--neon-cyan) / 0.1) 0%, transparent 50%),
+              radial-gradient(circle at 90% 80%, hsl(var(--neon-purple) / 0.1) 0%, transparent 50%)
+            `
           }} />
         </motion.div>
       </div>

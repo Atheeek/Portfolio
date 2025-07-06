@@ -3,47 +3,63 @@ import { Download, Github, Linkedin } from 'lucide-react';
 import profilePhoto from '../assets/profile-photo.jpg';
 import { Suspense } from 'react';
 
-// Simplified animated background without Three.js to avoid compatibility issues
+// Sophisticated gradient mesh background
 const AnimatedBackground = () => {
   return (
     <div className="absolute inset-0 overflow-hidden">
-      {/* Floating geometric shapes */}
-      {Array.from({ length: 6 }).map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute rounded-full opacity-20"
+      {/* Smooth gradient mesh */}
+      <div className="absolute inset-0">
+        {/* Main gradient overlay */}
+        <div 
+          className="absolute inset-0 opacity-60"
           style={{
-            width: `${60 + i * 20}px`,
-            height: `${60 + i * 20}px`,
-            background: `radial-gradient(circle, hsl(${180 + i * 60}, 100%, 60%), transparent)`,
-            left: `${10 + i * 15}%`,
-            top: `${20 + i * 10}%`,
+            background: `
+              radial-gradient(circle at 20% 80%, hsl(var(--neon-cyan) / 0.3) 0%, transparent 50%),
+              radial-gradient(circle at 80% 20%, hsl(var(--neon-purple) / 0.3) 0%, transparent 50%),
+              radial-gradient(circle at 40% 40%, hsl(var(--neon-pink) / 0.2) 0%, transparent 50%)
+            `
           }}
+        />
+        
+        {/* Subtle animated orbs */}
+        <motion.div
+          className="absolute inset-0"
           animate={{
-            y: [0, -30, 0],
-            x: [0, 15, 0],
-            scale: [1, 1.1, 1],
-            rotate: [0, 180, 360],
+            background: [
+              `radial-gradient(circle at 30% 70%, hsl(var(--neon-cyan) / 0.1) 0%, transparent 40%)`,
+              `radial-gradient(circle at 70% 30%, hsl(var(--neon-cyan) / 0.1) 0%, transparent 40%)`,
+              `radial-gradient(circle at 30% 70%, hsl(var(--neon-cyan) / 0.1) 0%, transparent 40%)`
+            ]
           }}
           transition={{
-            duration: 8 + i * 2,
+            duration: 8,
             repeat: Infinity,
             ease: "easeInOut"
           }}
         />
-      ))}
-      
-      {/* Grid pattern */}
-      <div 
-        className="absolute inset-0 opacity-5"
-        style={{
-          backgroundImage: `
-            linear-gradient(hsl(var(--neon-cyan)) 1px, transparent 1px),
-            linear-gradient(90deg, hsl(var(--neon-cyan)) 1px, transparent 1px)
-          `,
-          backgroundSize: '50px 50px'
-        }}
-      />
+        
+        {/* Soft particles */}
+        {Array.from({ length: 3 }).map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 bg-neon-cyan rounded-full opacity-30"
+            style={{
+              left: `${20 + i * 30}%`,
+              top: `${30 + i * 20}%`,
+            }}
+            animate={{
+              y: [-20, 20, -20],
+              x: [-10, 10, -10],
+              opacity: [0.3, 0.6, 0.3],
+            }}
+            transition={{
+              duration: 6 + i * 2,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+        ))}
+      </div>
     </div>
   );
 };
