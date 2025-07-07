@@ -33,7 +33,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeLink, setActiveLink] = useState('Home');
 
-  const handleLinkClick = (label) => {
+  const handleLinkClick = (label: string) => {
     setActiveLink(label);
     setIsOpen(false);
   };
@@ -42,7 +42,7 @@ const Navbar = () => {
     <motion.nav
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-  transition={{ duration: 0.5, ease: 'easeOut', delay: 0.1 }} 
+      transition={{ duration: 0.5, ease: 'easeOut', delay: 0.1 }}
       className="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-background/30 shadow-lg shadow-black/10"
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
@@ -61,7 +61,6 @@ const Navbar = () => {
               key={link.label}
               href={link.href}
               onClick={() => handleLinkClick(link.label)}
-
               className={`relative text-lg font-medium transition-colors duration-300 ${
                 activeLink === link.label
                   ? 'text-neon-cyan'
@@ -82,11 +81,17 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Nav */}
-        <div className="md:hidden flex items-center gap-4">
-          <div className="mt-1.5">
+        <div className="md:hidden flex items-center gap-3">
+          {/* Theme Toggle on Mobile */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
+          >
             <ThemeToggle />
-          </div>
+          </motion.div>
 
+          {/* Hamburger Icon */}
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="focus:outline-none text-foreground hover:text-neon-cyan z-50"
@@ -97,7 +102,7 @@ const Navbar = () => {
                 initial={{ rotate: -90, opacity: 0 }}
                 animate={{ rotate: 0, opacity: 1 }}
                 exit={{ rotate: 90, opacity: 0 }}
-transition={{ duration: 0.2, type: 'tween' }}
+                transition={{ duration: 0.2, type: 'tween' }}
               >
                 {isOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
               </motion.div>
@@ -126,7 +131,6 @@ transition={{ duration: 0.2, type: 'tween' }}
                 animate="visible"
                 exit="hidden"
                 transition={{ duration: 0.3, ease: 'easeOut' }}
-
                 className={`block text-lg py-3 text-center font-medium transition-colors duration-300 ${
                   activeLink === link.label
                     ? 'text-neon-cyan'
