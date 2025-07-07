@@ -102,7 +102,7 @@ const Hero = () => {
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.5, duration: 0.8 }}
+              transition={{ delay: 0.2, duration: 0.6}}
               className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-xl mx-auto md:mx-0"
             >
               Crafting exceptional digital experiences with modern technologies
@@ -112,7 +112,7 @@ const Hero = () => {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 2, duration: 0.8 }}
+              transition={{ delay: 0.3, duration: 0.8 }}
               className="flex flex-col sm:flex-row flex-wrap gap-3 justify-center md:justify-start"
             >
               <a
@@ -150,7 +150,7 @@ const Hero = () => {
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 2.5, duration: 0.8 }}
+            transition={{ delay: 0.4, duration: 0.6 }}
             className="w-full md:w-1/2 flex justify-center"
           >
             <div className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 group">

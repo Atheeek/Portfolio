@@ -19,7 +19,7 @@ const mobileMenuVariants = {
     opacity: 1,
     transition: {
       when: 'beforeChildren',
-      staggerChildren: 0.05,
+      staggerChildren: 0.02,
     },
   },
 };
@@ -42,7 +42,7 @@ const Navbar = () => {
     <motion.nav
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: 'easeInOut', delay: 3.5 }}
+  transition={{ duration: 0.5, ease: 'easeOut', delay: 0.1 }} 
       className="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-background/30 shadow-lg shadow-black/10"
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
@@ -61,6 +61,7 @@ const Navbar = () => {
               key={link.label}
               href={link.href}
               onClick={() => handleLinkClick(link.label)}
+
               className={`relative text-lg font-medium transition-colors duration-300 ${
                 activeLink === link.label
                   ? 'text-neon-cyan'
@@ -96,7 +97,7 @@ const Navbar = () => {
                 initial={{ rotate: -90, opacity: 0 }}
                 animate={{ rotate: 0, opacity: 1 }}
                 exit={{ rotate: 90, opacity: 0 }}
-                transition={{ duration: 0.2 }}
+transition={{ duration: 0.2, type: 'tween' }}
               >
                 {isOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
               </motion.div>
@@ -124,6 +125,8 @@ const Navbar = () => {
                 initial="hidden"
                 animate="visible"
                 exit="hidden"
+                transition={{ duration: 0.3, ease: 'easeOut' }}
+
                 className={`block text-lg py-3 text-center font-medium transition-colors duration-300 ${
                   activeLink === link.label
                     ? 'text-neon-cyan'
