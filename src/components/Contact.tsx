@@ -57,12 +57,13 @@ const Contact = () => {
       value: '+91 8971490262',
       href: 'tel:+918971490262'
     },
-    {
-      icon: MapPin,
-      label: 'Location',
-      value: 'Karnataka, India',
-      href: '#'
-    }
+   {
+  icon: MapPin,
+  label: 'Location',
+  value: 'Karnataka, India',
+  href: 'https://www.google.com/maps/place/Karnataka,+India'
+}
+
   ];
 
   const socialLinks = [
@@ -190,15 +191,18 @@ const Contact = () => {
                 Get in Touch
               </h3>
               {contactInfo.map((info, index) => (
-                <motion.a
-                  key={info.label}
-                  href={info.href}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ delay: 0.6 + index * 0.1, duration: 0.6 }}
-                  whileHover={{ scale: 1.02, x: 10 }}
-                  className="glass-card p-6 flex items-center space-x-4 group cursor-pointer"
-                >
+               <motion.a
+  key={info.label}
+  href={info.href}
+  target={info.href.startsWith('mailto:') || info.href.startsWith('tel:') ? '_self' : '_blank'}
+  rel="noopener noreferrer"
+  initial={{ opacity: 0, y: 20 }}
+  animate={isInView ? { opacity: 1, y: 0 } : {}}
+  transition={{ delay: 0.6 + index * 0.1, duration: 0.6 }}
+  whileHover={{ scale: 1.02, x: 10 }}
+  className="glass-card p-6 flex items-center space-x-4 group cursor-pointer"
+>
+
                   <div className="p-3 bg-neon-cyan/10 rounded-lg group-hover:bg-neon-cyan/20 transition-colors">
                     <info.icon className="w-6 h-6 text-neon-cyan" />
                   </div>
