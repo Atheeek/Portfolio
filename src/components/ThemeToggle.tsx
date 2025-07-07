@@ -20,7 +20,7 @@ const ThemeToggle = () => {
   const toggleTheme = () => {
     const newIsDark = !isDark;
     setIsDark(newIsDark);
-    
+
     if (newIsDark) {
       localStorage.setItem('theme', 'dark');
       document.documentElement.classList.remove('light');
@@ -35,7 +35,7 @@ const ThemeToggle = () => {
       onClick={toggleTheme}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
-className="p-2 md:p-3 glass-card hover:neon-glow transition-all duration-300 group"
+      className="fixed top-14 right-3 md:top-14 md:right-8 z-50 p-3 glass-card hover:neon-glow transition-all duration-300 group"
       aria-label="Toggle theme"
     >
       <motion.div
@@ -44,7 +44,7 @@ className="p-2 md:p-3 glass-card hover:neon-glow transition-all duration-300 gro
           rotate: isDark ? 0 : 180,
           scale: isDark ? 1 : 0.8
         }}
-        transition={{ duration: 0.3, ease: "easeInOut" }}
+        transition={{ duration: 0.3, ease: 'easeInOut' }}
         className="relative w-6 h-6"
       >
         {isDark ? (

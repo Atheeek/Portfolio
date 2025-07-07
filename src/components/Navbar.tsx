@@ -33,7 +33,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeLink, setActiveLink] = useState('Home');
 
-  const handleLinkClick = (label: string) => {
+  const handleLinkClick = (label) => {
     setActiveLink(label);
     setIsOpen(false);
   };
@@ -81,17 +81,11 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Nav */}
-        <div className="md:hidden flex items-center gap-3">
-          {/* Theme Toggle on Mobile */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.3 }}
-          >
+        <div className="md:hidden flex items-center gap-4">
+          <div className="mt-1.5">
             <ThemeToggle />
-          </motion.div>
+          </div>
 
-          {/* Hamburger Icon */}
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="focus:outline-none text-foreground hover:text-neon-cyan z-50"
