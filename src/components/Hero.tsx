@@ -116,7 +116,7 @@ const Hero = () => {
               className="flex flex-col sm:flex-row flex-wrap gap-3 justify-center md:justify-start"
             >
               <a
-                href="/resume1.pdf"
+                href="/Mahammad_Atheek_Resume4.pdf"
                 download="Mahammad_Atheek_Resume.pdf"
                 className="btn-neon group text-sm sm:text-base"
               >
