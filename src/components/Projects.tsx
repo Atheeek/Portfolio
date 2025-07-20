@@ -21,7 +21,7 @@ const Projects = () => {
       image: cognifyImg,
       technologies: ["React.js", "Node.js", "Express.js", "MongoDB", "JWT", "OpenRouter", "Tailwind CSS"],
       githubUrl: "https://github.com/Atheeek/Cognify-project",
-      liveUrl: "#",
+      liveUrl: "http://13.53.37.199",
       featured: true
     },
     {
