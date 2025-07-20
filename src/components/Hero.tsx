@@ -182,7 +182,7 @@ const Hero = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 3 }}
-          className="absolute bottom-6 left-1/2 -translate-x-1/2"
+          className="absolute bottom-6 left-1/2 mt-3 -translate-x-1/2"
         >
           <div className="w-6 h-10 border-2 border-neon-cyan rounded-full flex justify-center">
             <div className="w-1 h-3 bg-neon-cyan rounded-full mt-2 animate-bounce"></div>
