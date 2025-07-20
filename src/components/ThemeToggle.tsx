@@ -1,34 +1,29 @@
 import { motion } from 'framer-motion';
 import { Moon, Sun } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { useState, useLayoutEffect } from 'react';
+
+const getInitialTheme = () => {
+  if (typeof window !== 'undefined') {
+    const savedTheme = localStorage.getItem('theme');
+    return savedTheme ? savedTheme === 'dark' : true;
+  }
+  return true; // Default to dark during SSR
+};
 
 const ThemeToggle = () => {
-  const [isDark, setIsDark] = useState(true); // Default to dark
+  const [isDark, setIsDark] = useState(getInitialTheme);
 
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('theme');
-
-    if (savedTheme === 'light') {
-      setIsDark(false);
-      document.documentElement.classList.add('light');
-    } else {
-      setIsDark(true);
+  useLayoutEffect(() => {
+    if (isDark) {
       document.documentElement.classList.remove('light');
-    }
-  }, []);
-
-  const toggleTheme = () => {
-    const newIsDark = !isDark;
-    setIsDark(newIsDark);
-
-    if (newIsDark) {
       localStorage.setItem('theme', 'dark');
-      document.documentElement.classList.remove('light');
     } else {
-      localStorage.setItem('theme', 'light');
       document.documentElement.classList.add('light');
+      localStorage.setItem('theme', 'light');
     }
-  };
+  }, [isDark]);
+
+  const toggleTheme = () => setIsDark((prev) => !prev);
 
   return (
     <motion.button
