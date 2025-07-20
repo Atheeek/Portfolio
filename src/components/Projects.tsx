@@ -32,7 +32,7 @@ const Projects = () => {
       image: smartcityImg,
       technologies: ["React.js", "Node.js", "Express.js", "MongoDB", "Google Maps API", "JWT", "Tailwind CSS"],
       githubUrl: "https://github.com/Atheeek/City-fix",
-      liveUrl: "#",
+      liveUrl: "http://16.170.212.110/",
       featured: true
     },
     {
