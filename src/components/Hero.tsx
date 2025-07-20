@@ -3,7 +3,6 @@ import { Download, Github, Linkedin } from 'lucide-react';
 import profilePhoto from '../assets/profile4.png';
 import { useState, useEffect } from 'react';
 
-// Background Animation
 const AnimatedBackground = () => (
   <div className="absolute inset-0 overflow-hidden">
     <motion.div
@@ -29,7 +28,6 @@ const AnimatedBackground = () => (
   </div>
 );
 
-// Typewriter
 const TypewriterText = () => {
   const texts = [
     'Mahammad Atheek',
@@ -72,6 +70,11 @@ const TypewriterText = () => {
 };
 
 const Hero = () => {
+  useEffect(() => {
+    // Prevent horizontal overflow issues on mobile
+    document.body.style.overflowX = 'hidden';
+  }, []);
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 sm:px-6">
       <div className="absolute inset-0 z-0">
@@ -80,7 +83,7 @@ const Hero = () => {
 
       <div className="relative z-10 max-w-7xl w-full mx-auto text-center md:text-left py-16 sm:py-24">
         <div className="flex flex-col-reverse md:flex-row items-center gap-12">
-          {/* Left: Text Content */}
+          {/* Text Content */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -102,13 +105,12 @@ const Hero = () => {
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.6}}
+              transition={{ delay: 0.2, duration: 0.6 }}
               className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-xl mx-auto md:mx-0"
             >
               Crafting exceptional digital experiences with modern technologies
             </motion.p>
 
-            {/* CTA Buttons */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -146,7 +148,7 @@ const Hero = () => {
             </motion.div>
           </motion.div>
 
-          {/* Right: Profile Image */}
+          {/* Profile Image */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -154,19 +156,16 @@ const Hero = () => {
             className="w-full md:w-1/2 flex justify-center"
           >
             <div className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 group">
-              {/* Background Glow */}
               <motion.div
                 className="absolute inset-0 rounded-full blur-2xl bg-gradient-to-br from-cyan-400 via-purple-500 to-pink-500 opacity-40"
                 animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.4, 0.3] }}
                 transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
               />
-              {/* Glow Ring */}
               <motion.div
                 className="absolute inset-0 rounded-full border border-cyan-500 opacity-20"
                 animate={{ rotate: 360 }}
                 transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
               />
-              {/* Image */}
               <motion.img
                 src={profilePhoto}
                 alt="Mahammad Atheek Rahman"
@@ -182,7 +181,7 @@ const Hero = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 3 }}
-          className="absolute bottom-4 left-1/2  -translate-x-1/2"
+          className="absolute bottom-4 left-1/2 -translate-x-1/2"
         >
           <div className="w-6 h-10 border-2 border-neon-cyan rounded-full flex justify-center">
             <div className="w-1 h-3 bg-neon-cyan rounded-full mt-2 animate-bounce"></div>
