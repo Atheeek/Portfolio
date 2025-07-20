@@ -7,7 +7,7 @@ import Contact from './Contact';
 import ThemeToggle from './ThemeToggle';
 import Experience from './Experience';
 import Navbar from './Navbar';
-
+import { Analytics } from "@vercel/analytics/next"
 
 const Portfolio = () => {
   const ref = useRef(null);
@@ -119,6 +119,8 @@ const Portfolio = () => {
           </div>
         </motion.footer>
       </div>
+      {/* Analytics */}
+      <Analytics />
     </div>
   );
 };
